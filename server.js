@@ -1,6 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcryptjs'); 
 const cors = require('cors');
+app.use(cors({ origin: 'https://recipes-application78.netlify.app' }));
+
 const dotenv = require('dotenv');
 
 // Controllers
