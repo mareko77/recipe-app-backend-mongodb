@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs'); 
 const cors = require('cors');
-app.use(cors({ origin: 'https://recipes-application78.netlify.app' }));
+
 
 const dotenv = require('dotenv');
 
@@ -23,6 +23,8 @@ const PORT = process.env.PORT || 3002;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+app.use(cors({ origin: 'https://recipes-application78.netlify.app' }));
 
 
 const { MongoClient } = require('mongodb');
