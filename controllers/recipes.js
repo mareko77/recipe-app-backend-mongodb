@@ -48,14 +48,16 @@ const handleDeleteRecipe = async (req, res) => {
     }
 };
 
+
+
 const handleUpdateRecipe = async (req, res) => {
     const { id } = req.params;
-    const { name, ingredients, description, url_photo } = req.body;
+    const { name, ingredients, description,  url_photo } = req.body;
 
     try {
         const updatedRecipe = await Recipe.findByIdAndUpdate(
             id,
-            { name, ingredients, description, url_photo },
+            { name, ingredients, description,  url_photo },
             { new: true }
         );
         res.json(updatedRecipe);
@@ -71,6 +73,11 @@ module.exports = {
     handleDeleteRecipe,
     handleUpdateRecipe,
 };
+
+
+
+  
+
 
 
 
