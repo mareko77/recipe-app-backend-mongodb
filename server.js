@@ -1,5 +1,4 @@
 const express = require('express');
-//const bcrypt = require('bcrypt'); 
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -23,28 +22,13 @@ const PORT = process.env.PORT || 3002;
 app.use(cors());
 app.use(express.json());
 
-
-const { MongoClient } = require('mongodb');
-
-const uri = 'mongodb://localhost:27017';
-const client = new MongoClient(uri); 
-
-(async () => {
-  try {
-    await client.connect();
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-  } finally {
-    await client.close();
-  }
-})();
-
-
-// Database connection setup
+// Database connection setup using Mongoose
 const mongoose = require('mongoose');
 
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(process.env.mongodb+srv://ograbek77:<db_password>@cluster1.jpr71.mongodb.net/?appName=Cluster1, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => console.log('MongoDB connected successfully.'))
   .catch((err) => console.error('MongoDB connection error:', err));
@@ -53,15 +37,15 @@ mongoose
 app.get('/', (req, res) => res.send('Welcome to the Recipe App'));
 
 app.post('/register', async (req, res) => {
-    await register.handleRegister(req, res);
+  await register.handleRegister(req, res);
 });
 
 app.post('/signin', async (req, res) => {
-    await signin.handleSignin(req, res, mongoose, bcrypt);
+  await signin.handleSignin(req, res, mongoose, bcrypt);
 });
 
 app.get('/profile/:id', (req, res) => {
-    profile.handleProfileGet(req, res, mongoose);
+  profile.handleProfileGet(req, res, mongoose);
 });
 
 app.post('/recipes', recipes.handleAddRecipe);
@@ -71,6 +55,7 @@ app.put('/recipes/:id', recipes.handleUpdateRecipe);
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`App is running on port ${PORT}`);
+  console.log(`App is running on port ${PORT}`);
 });
+
 
