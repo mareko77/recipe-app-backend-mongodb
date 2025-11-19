@@ -26,7 +26,7 @@ app.use(express.json());
 const mongoose = require('mongoose');
 
 mongoose
-  .connect(process.env.mongodb+srv://ograbek77:<db_password>@cluster1.jpr71.mongodb.net/?appName=Cluster1, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
